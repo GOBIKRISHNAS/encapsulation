@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        li {
+            list-style-type: none;
+            padding-top: 20px;
+            text-align: center;
+        }
+    </style>
+    <title>Inheritance</title>
+</head>
+
+<body>
+    <button style="display: block; height: 100px; width: 50%;margin: 100px auto 10px;">
+        <h1>iPhone12Pro Specifications</h1>
+    </button>
+    <button style="display: block; height: 100px; width: 50%;margin: auto auto 10px;">iPhone12 Pro</button>
+    <button style="display: block; height: 400px; width: 50%;margin: auto;">
+        <ul id="iphonepro-list"></ul>
+    </button>
+
+    <script>
+        
+        var iPhone12Pro = function(features){
+            this.features = features;
+
+            // Private Variables which can't be invoked outside the function
+            var tax = 3000;
+            var base_cost = 100999;
+            var addition_cost = 5000;
+
+            // Private member inorder to hide the cost calculation
+            var total_cost = function(){
+                return "<li>Cost: $" + String(tax+base_cost+addition_cost)+ "</li>";
+            }
+
+            this.present = function() {
+                var str = "<li><img src = '" + this.features.img + "'></li>" + total_cost();
+                for (var i = 0; i < Object.keys(this.features).length - 1; i++) {
+                    str = str + "<li>" + Object.keys(this.features)[i] + " : " + Object.values(this.features)[i] + "</li>";
+                }
+                return str
+            }
+        }
+        
+        var phone = new iPhone12Pro({ "display": "6.1", "network": "5G", "battery": "Up to 17 hours of video playback3", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNLqFfxREUZswjjeV-BG74pC8jGHly62_w5X-oot49yBXH51Q0DeJAQ74_cfLeD48Cd5IJyg&usqp=CAc" })
+
+        document.getElementById("iphonepro-list").innerHTML = phone.present()
+
+    </script>
+
+</body>
+
+</html>
